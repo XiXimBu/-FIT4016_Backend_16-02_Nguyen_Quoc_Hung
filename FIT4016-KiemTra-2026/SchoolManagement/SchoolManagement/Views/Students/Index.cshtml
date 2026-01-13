@@ -1,0 +1,48 @@
+@model List<FIT4016_KiemTra_2026.Models.Student>
+    @using FIT4016_KiemTra_2026.Models
+
+    <h2>Students List</h2>
+
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+        + Add Student
+    </button>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Student ID</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>School ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+{
+            <tr>
+                <td>@item.full_name</td>
+                <td>@item.student_id</td>
+                <td>@item.email</td>
+                <td>@item.phone</td>
+                <td>@item.school_id</td>
+                <td>
+                    <button class="btn btn-warning btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editModal-@item.Id">
+                        Edit
+                    </button>
+
+                    <form asp-action="Delete" method="post" style="display:inline">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button class="btn btn-danger btn-sm"
+                                onclick="return confirm('Delete this student?')">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>
